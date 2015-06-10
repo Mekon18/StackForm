@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace StackForm
 {
     public partial class Form1 : Form
@@ -33,7 +32,6 @@ namespace StackForm
             textBox1.Clear();
         }
 
-
         private void buttonRemove_Click(object sender, EventArgs e)
         {
             textBox1.Text = textBox1.Text + "<" + a.Remove() + "> ";
@@ -49,5 +47,4 @@ namespace StackForm
             textBox1.Clear();
         }
     }
-
 }
