@@ -113,6 +113,10 @@ namespace StackForm.Forms
             buttonBackToHab_clicker.Enabled = true;
             buttonBegin.Enabled = true;
             buttonBegin.BackColor = Color.Teal;
+
+            MessageBox.Show("Игра окончена. Ваш счёт - " + score);
+            score = 0;
+            labelScoreNumber.Text = "0";
         };
 
             panelForClicks.Enabled = false;
