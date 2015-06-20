@@ -10,17 +10,17 @@ namespace DataStructures.Stack
     public class MyStack
     {
         StackItem _curr;
-        public void Add(string num)
+        public void Add(string str)
         {
             StackItem _currnew = new StackItem();
-            _currnew.SetNum(num);
-            _currnew.SetPrev(_curr);
+            _currnew._str = str;
+            _currnew._prev = _curr;
             _curr = _currnew;
         }
         public string Remove()
         {
-            string _num = _curr.GetNum();
-            _curr = _curr.GetPrev();
+            string _num = _curr._str;
+            _curr = _curr._prev;
             return _num.ToString();
         }
     }
