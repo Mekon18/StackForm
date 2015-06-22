@@ -162,6 +162,7 @@ namespace StackForm.Forms
             {
                 _playersList.Add(player);
                 listBoxPlayers.Items.Add(player);
+                listBoxPlayers.SelectedIndex = _playersList.Count - 1;
                 fa.Hide();
                 JsonFileHelper.JsonFileHelper.Write<List<string>>("playersFile.json",_playersList);
             }
@@ -176,6 +177,7 @@ namespace StackForm.Forms
                 int a =  listBoxPlayers.SelectedIndex;
                 _playersList.RemoveAt(listBoxPlayers.SelectedIndex);
                 listBoxPlayers.Items.RemoveAt(listBoxPlayers.SelectedIndex);
+                listBoxPlayers.SelectedIndex = _playersList.Count - 1;
                 JsonFileHelper.JsonFileHelper.Write<List<string>>("playersFile.json", _playersList);
             }
         }
