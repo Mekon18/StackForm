@@ -84,7 +84,7 @@
             this.listBoxPlayers.FormattingEnabled = true;
             this.listBoxPlayers.Location = new System.Drawing.Point(12, 98);
             this.listBoxPlayers.Name = "listBoxPlayers";
-            this.listBoxPlayers.Size = new System.Drawing.Size(94, 95);
+            this.listBoxPlayers.Size = new System.Drawing.Size(81, 95);
             this.listBoxPlayers.TabIndex = 4;
             this.listBoxPlayers.SelectedIndexChanged += new System.EventHandler(this.lbp_IndexChenged);
             // 
@@ -92,7 +92,7 @@
             // 
             this.buttonAddPlayer.Location = new System.Drawing.Point(12, 54);
             this.buttonAddPlayer.Name = "buttonAddPlayer";
-            this.buttonAddPlayer.Size = new System.Drawing.Size(93, 23);
+            this.buttonAddPlayer.Size = new System.Drawing.Size(81, 23);
             this.buttonAddPlayer.TabIndex = 5;
             this.buttonAddPlayer.Text = "Добавить";
             this.buttonAddPlayer.UseVisualStyleBackColor = true;
@@ -102,11 +102,11 @@
             // 
             this.buttonDeletePlayer.Location = new System.Drawing.Point(13, 200);
             this.buttonDeletePlayer.Name = "buttonDeletePlayer";
-            this.buttonDeletePlayer.Size = new System.Drawing.Size(93, 23);
+            this.buttonDeletePlayer.Size = new System.Drawing.Size(80, 23);
             this.buttonDeletePlayer.TabIndex = 6;
             this.buttonDeletePlayer.Text = "Удалить";
             this.buttonDeletePlayer.UseVisualStyleBackColor = true;
-            this.buttonDeletePlayer.Click += new System.EventHandler(this.butttonDeletePlayer_Click);
+            this.buttonDeletePlayer.Click += new System.EventHandler(this.buttonDeletePlayer_Click);
             // 
             // label1
             // 

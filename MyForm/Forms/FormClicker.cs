@@ -23,8 +23,8 @@ namespace StackForm.Forms
         private Action _timer;
         private Task _myTimer;
         private List<Score> _highScore;
-        List<string> _playersList;
-        FormAddPlayer fa;
+        private List<string> _playersList;
+        private FormAddPlayer fa;
         private bool _nameRepeated;
 
         public FormClicker()
@@ -168,20 +168,6 @@ namespace StackForm.Forms
             }
         }
 
-        private void butttonDeletePlayer_Click(object sender, EventArgs e)
-        {
-            score = 0;
-            labelScoreNumber.Text = score.ToString();
-            if (listBoxPlayers.SelectedItem != null)
-            {
-                int a =  listBoxPlayers.SelectedIndex;
-                _playersList.RemoveAt(listBoxPlayers.SelectedIndex);
-                listBoxPlayers.Items.RemoveAt(listBoxPlayers.SelectedIndex);
-                listBoxPlayers.SelectedIndex = _playersList.Count - 1;
-                JsonFileHelper.JsonFileHelper.Write<List<string>>("playersFile.json", _playersList);
-            }
-        }
-
         private void lbp_IndexChenged(object sender, EventArgs e)
         {
             score = 0;
@@ -216,6 +202,21 @@ namespace StackForm.Forms
             score++;
             labelScoreNumber.Text = score.ToString();
 
+        }
+
+        private void buttonDeletePlayer_Click(object sender, EventArgs e)
+        {
+
+            score = 0;
+            labelScoreNumber.Text = score.ToString();
+            if (listBoxPlayers.SelectedItem != null)
+            {
+                int a = listBoxPlayers.SelectedIndex;
+                _playersList.RemoveAt(listBoxPlayers.SelectedIndex);
+                listBoxPlayers.Items.RemoveAt(listBoxPlayers.SelectedIndex);
+                listBoxPlayers.SelectedIndex = _playersList.Count - 1;
+                JsonFileHelper.JsonFileHelper.Write<List<string>>("playersFile.json", _playersList);
+            }
         }
     }
 }

@@ -30,6 +30,7 @@
         {
             this.buttonOpenStackForm = new System.Windows.Forms.Button();
             this.buttonOpenClicker = new System.Windows.Forms.Button();
+            this.buttonOpen1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonOpenStackForm
@@ -54,11 +55,23 @@
             this.buttonOpenClicker.UseVisualStyleBackColor = false;
             this.buttonOpenClicker.Click += new System.EventHandler(this.buttonOpenClicker_Click);
             // 
+            // buttonOpen1
+            // 
+            this.buttonOpen1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.buttonOpen1.Location = new System.Drawing.Point(13, 41);
+            this.buttonOpen1.Name = "buttonOpen1";
+            this.buttonOpen1.Size = new System.Drawing.Size(211, 26);
+            this.buttonOpen1.TabIndex = 2;
+            this.buttonOpen1.Text = "открыть крестики - нолики";
+            this.buttonOpen1.UseVisualStyleBackColor = false;
+            this.buttonOpen1.Click += new System.EventHandler(this.buttonOpen1_Click);
+            // 
             // FormHab
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(236, 51);
+            this.ClientSize = new System.Drawing.Size(236, 79);
+            this.Controls.Add(this.buttonOpen1);
             this.Controls.Add(this.buttonOpenClicker);
             this.Controls.Add(this.buttonOpenStackForm);
             this.Name = "FormHab";
@@ -72,5 +85,6 @@
 
         private System.Windows.Forms.Button buttonOpenStackForm;
         private System.Windows.Forms.Button buttonOpenClicker;
+        private System.Windows.Forms.Button buttonOpen1;
     }
 }

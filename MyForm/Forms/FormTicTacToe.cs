@@ -7,40 +7,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BusinessEntities;
 
 namespace StackForm.Forms
 {
-    public partial class FormHab : Form
+    public partial class FormTicTacToe : Form
     {
-        public FormHab()
+        public FormTicTacToe(Player PlayerOne, Player PlayerSecond)
         {
             InitializeComponent();
+            labelPlayersName.Text = PlayerOne.Name + " VS " + PlayerSecond.Name;
         }
 
-        private void buttonOpenStackForm_Click(object sender, EventArgs e)
+        private void buttonBackToHabfttt_Click(object sender, EventArgs e)
         {
-            StackForm sf = new StackForm();
-            sf.Show();
+            FormHab fh = new FormHab();
+            fh.Show();
             this.Hide();
         }
 
-        private void FormHab_Closing(object sender, FormClosingEventArgs e)
+        private void FormTicTacToe_Closing(object sender, FormClosingEventArgs e)
         {
             Application.Exit();
         }
 
-        private void buttonOpenClicker_Click(object sender, EventArgs e)
-        {
-            FormClicker fc = new FormClicker();
-            fc.Show();
-            this.Hide();
-        }
-
-        private void buttonOpen1_Click(object sender, EventArgs e)
+        private void buttonSelectOther_Click(object sender, EventArgs e)
         {
             FormSelectPlayerForTTT fspttt = new FormSelectPlayerForTTT();
             fspttt.Show();
             this.Hide();
         }
+
     }
 }
