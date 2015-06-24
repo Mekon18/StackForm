@@ -18,7 +18,7 @@ namespace StackForm.Forms
         private List<string> _playersList;
         private Player[] _selectedPlayers;
         private int _selectedPlayerNum;
-       
+
 
         public FormSelectPlayerForTTT()
         {
@@ -36,7 +36,7 @@ namespace StackForm.Forms
 
                 listBoxPlayersTicTacToe.Items.AddRange(_playersList.ToArray());
             }
-            
+
         }
 
         private void buttonBackToHabTicTacToe_Click(object sender, EventArgs e)
@@ -77,6 +77,7 @@ namespace StackForm.Forms
             if (_nameRepeated == false)
             {
                 _playersList.Add(player);
+
                 listBoxPlayersTicTacToe.Items.Add(player);
                 listBoxPlayersTicTacToe.SelectedIndex = _playersList.Count - 1;
                 fa.Hide();
@@ -90,9 +91,22 @@ namespace StackForm.Forms
             {
                 int a = listBoxPlayersTicTacToe.SelectedIndex;
                 _playersList.RemoveAt(listBoxPlayersTicTacToe.SelectedIndex);
+                if (listBoxPlayersTicTacToe.SelectedItem.ToString() == _selectedPlayers[0].Name)
+                {
+                    _selectedPlayers[0] = _selectedPlayers[1];
+                    listBoxSelectedPlayers.Items.Clear();
+                    listBoxSelectedPlayers.Items.Add(_selectedPlayers[0].Name);
+                    _selectedPlayerNum = 1;
+                }
+                if(listBoxPlayersTicTacToe.SelectedItem.ToString() == _selectedPlayers[1].Name)
+                {
+                    listBoxSelectedPlayers.Items.Clear();
+                    listBoxSelectedPlayers.Items.Add(_selectedPlayers[0].Name);
+                    _selectedPlayerNum = 1;
+                }
                 listBoxPlayersTicTacToe.Items.RemoveAt(listBoxPlayersTicTacToe.SelectedIndex);
                 listBoxPlayersTicTacToe.SelectedIndex = _playersList.Count - 1;
-                JsonFileHelper.JsonFileHelper.Write<List<string>>("playersFile.json", _playersList);
+                JsonFileHelper.JsonFileHelper.Write<List<string>>("playersTicTacToeFile.json", _playersList);
             }
         }
 
@@ -100,19 +114,46 @@ namespace StackForm.Forms
         {
             if (listBoxPlayersTicTacToe.SelectedItem != null)
             {
-                if (listBoxPlayersTicTacToe.SelectedItem.ToString() == _selectedPlayers[0].Name)
+                if ((listBoxPlayersTicTacToe.SelectedItem.ToString() == _selectedPlayers[0].Name) || (listBoxPlayersTicTacToe.SelectedItem.ToString() == _selectedPlayers[1].Name))
                 {
                     MessageBox.Show("Игрок уже выбран. Выберите другого игрока");
                 }
                 else
                 {
-                    _selectedPlayers[_selectedPlayerNum].Name = listBoxPlayersTicTacToe.SelectedItem.ToString();
-                    _selectedPlayerNum++;
+                    if (_selectedPlayerNum == 2)
+                    {
+                        _selectedPlayerNum = 0;
+                        _selectedPlayers[_selectedPlayerNum].Name = listBoxPlayersTicTacToe.SelectedItem.ToString();
+                        _selectedPlayerNum++;
+                        listBoxSelectedPlayers.Items.Clear();
+                        listBoxSelectedPlayers.Items.Add(_selectedPlayers[0].Name);
+                        listBoxSelectedPlayers.Items.Add(_selectedPlayers[1].Name);
+                    }
+
+                    if (listBoxPlayersTicTacToe.SelectedItem.ToString() != _selectedPlayers[0].Name)
+                    {
+                        _selectedPlayers[_selectedPlayerNum].Name = listBoxPlayersTicTacToe.SelectedItem.ToString();
+                        if (_selectedPlayerNum == 0)
+                            listBoxSelectedPlayers.Items.Add(_selectedPlayers[0].Name);
+                        if (_selectedPlayerNum == 1)
+                        {
+                            listBoxSelectedPlayers.Items.Clear();
+                            listBoxSelectedPlayers.Items.Add(_selectedPlayers[0].Name);
+                            listBoxSelectedPlayers.Items.Add(_selectedPlayers[1].Name);
+                        }
+                        _selectedPlayerNum++;
+                    }
                 }
             }
-            if (_selectedPlayerNum == 2)
+
+        }
+
+
+        private void buttonBeginTTT_Click(object sender, EventArgs e)
+        {
+            if ((_selectedPlayers[0] != null) && (_selectedPlayers[1] != null))
             {
-                FormTicTacToe fttt = new FormTicTacToe(_selectedPlayers[0], _selectedPlayers[1]);
+                FormTicTacToe fttt = new FormTicTacToe(_selectedPlayers[0], _selectedPlayers[1], (int)numericUpDown1.Value);
                 fttt.Show();
                 this.Hide();
             }
