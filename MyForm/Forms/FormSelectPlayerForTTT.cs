@@ -153,7 +153,7 @@ namespace StackForm.Forms
         {
             if ((_selectedPlayers[0] != null) && (_selectedPlayers[1] != null))
             {
-                FormTicTacToe fttt = new FormTicTacToe(_selectedPlayers[0], _selectedPlayers[1], (int)numericUpDown1.Value);
+                FormTicTacToe fttt = new FormTicTacToe(_selectedPlayers[0], _selectedPlayers[1], (int)numericUpDown1.Value, (int)numericUpDown2.Value);
                 fttt.Show();
                 this.Hide();
             }

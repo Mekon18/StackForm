@@ -39,7 +39,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.buttonBeginTTT = new System.Windows.Forms.Button();
             this.listBoxSelectedPlayers = new System.Windows.Forms.ListBox();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonBackToHabTicTacToe
@@ -47,7 +50,7 @@
             this.buttonBackToHabTicTacToe.BackColor = System.Drawing.SystemColors.ActiveBorder;
             this.buttonBackToHabTicTacToe.Location = new System.Drawing.Point(95, 156);
             this.buttonBackToHabTicTacToe.Name = "buttonBackToHabTicTacToe";
-            this.buttonBackToHabTicTacToe.Size = new System.Drawing.Size(91, 23);
+            this.buttonBackToHabTicTacToe.Size = new System.Drawing.Size(106, 23);
             this.buttonBackToHabTicTacToe.TabIndex = 1;
             this.buttonBackToHabTicTacToe.Text = "Назад";
             this.buttonBackToHabTicTacToe.UseVisualStyleBackColor = false;
@@ -114,7 +117,7 @@
             // 
             this.numericUpDown1.Location = new System.Drawing.Point(95, 100);
             this.numericUpDown1.Maximum = new decimal(new int[] {
-            7,
+            10,
             0,
             0,
             0});
@@ -124,7 +127,7 @@
             0,
             0});
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(39, 20);
+            this.numericUpDown1.Size = new System.Drawing.Size(73, 20);
             this.numericUpDown1.TabIndex = 8;
             this.numericUpDown1.Value = new decimal(new int[] {
             3,
@@ -146,7 +149,7 @@
             this.buttonBeginTTT.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.buttonBeginTTT.Location = new System.Drawing.Point(95, 127);
             this.buttonBeginTTT.Name = "buttonBeginTTT";
-            this.buttonBeginTTT.Size = new System.Drawing.Size(75, 23);
+            this.buttonBeginTTT.Size = new System.Drawing.Size(106, 23);
             this.buttonBeginTTT.TabIndex = 10;
             this.buttonBeginTTT.Text = "Играть";
             this.buttonBeginTTT.UseVisualStyleBackColor = false;
@@ -157,14 +160,46 @@
             this.listBoxSelectedPlayers.FormattingEnabled = true;
             this.listBoxSelectedPlayers.Location = new System.Drawing.Point(96, 56);
             this.listBoxSelectedPlayers.Name = "listBoxSelectedPlayers";
-            this.listBoxSelectedPlayers.Size = new System.Drawing.Size(108, 30);
+            this.listBoxSelectedPlayers.Size = new System.Drawing.Size(132, 30);
             this.listBoxSelectedPlayers.TabIndex = 11;
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(178, 100);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(50, 20);
+            this.numericUpDown2.TabIndex = 12;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(175, 84);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(59, 13);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "играем до";
             // 
             // FormSelectPlayerForTTT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(216, 186);
+            this.ClientSize = new System.Drawing.Size(240, 186);
+            this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.listBoxSelectedPlayers);
             this.Controls.Add(this.buttonBeginTTT);
             this.Controls.Add(this.label4);
@@ -176,10 +211,12 @@
             this.Controls.Add(this.buttonAddPlayerTicTacToe);
             this.Controls.Add(this.buttonBackToHabTicTacToe);
             this.Controls.Add(this.listBoxPlayersTicTacToe);
+            this.Controls.Add(this.label3);
             this.Name = "FormSelectPlayerForTTT";
             this.Text = "FormTicTacToe";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormTicTacToe_Closing);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,5 +235,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button buttonBeginTTT;
         private System.Windows.Forms.ListBox listBoxSelectedPlayers;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.Label label3;
     }
 }
