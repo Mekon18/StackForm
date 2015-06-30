@@ -41,6 +41,7 @@
             this.listBoxSelectedPlayers = new System.Windows.Forms.ListBox();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
+            this.listBoxRecords = new System.Windows.Forms.ListBox();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
@@ -194,11 +195,20 @@
             this.label3.TabIndex = 13;
             this.label3.Text = "играем до";
             // 
+            // listBoxRecords
+            // 
+            this.listBoxRecords.FormattingEnabled = true;
+            this.listBoxRecords.Location = new System.Drawing.Point(234, 55);
+            this.listBoxRecords.Name = "listBoxRecords";
+            this.listBoxRecords.Size = new System.Drawing.Size(149, 95);
+            this.listBoxRecords.TabIndex = 14;
+            // 
             // FormSelectPlayerForTTT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(240, 186);
+            this.ClientSize = new System.Drawing.Size(395, 186);
+            this.Controls.Add(this.listBoxRecords);
             this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.listBoxSelectedPlayers);
             this.Controls.Add(this.buttonBeginTTT);
@@ -215,6 +225,7 @@
             this.Name = "FormSelectPlayerForTTT";
             this.Text = "FormTicTacToe";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormTicTacToe_Closing);
+            this.Shown += new System.EventHandler(this.FormSelectPlayerForTTT_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
@@ -237,5 +248,6 @@
         private System.Windows.Forms.ListBox listBoxSelectedPlayers;
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListBox listBoxRecords;
     }
 }

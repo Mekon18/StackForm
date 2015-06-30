@@ -14,22 +14,29 @@ namespace StackForm.Forms
     public partial class FormTicTacToe : Form
     {
         private int _switchstroke;
-        private Player _playerOne;
-        private Player _playerSecond;
+        private ScoreRecord _score;
         private Button[,] _buttonsTTT;
         private int _fieldSize;
         private bool _win;
         private int _countForWin;
+        
 
-        public FormTicTacToe(Player PlOne, Player PlSecond, int fieldSize, int countForWin)
+
+        public FormTicTacToe(Player PlOne, Player PlSecond, int fieldSize, int countForWin, int winsOne, int winsSecond)
         {
             InitializeComponent();
-            _playerOne = PlOne;
-            _playerSecond = PlSecond;
+            _score = new ScoreRecord();
+            _score.PlayerOneScore = new Score();
+            _score.PlayerSecondScore = new Score();
+            _score.PlayerOneScore.Player = PlOne;
+            _score.PlayerSecondScore.Player = PlSecond;
             labelPlayersName.Text = PlOne.Name + " VS " + PlSecond.Name;
             _switchstroke = 1;
             _fieldSize = fieldSize;
             _countForWin = countForWin;
+            _score.PlayerOneScore.ScoreNum = winsOne;
+            _score.PlayerSecondScore.ScoreNum = winsSecond;
+            label3.Text = winsOne + ":" + winsSecond;
 
             #region создание поля
 
@@ -60,7 +67,7 @@ namespace StackForm.Forms
                     _buttonsTTT[j, i] = but;
                 }
             }
-            label2.Text = _playerOne.Name + "(X)";
+            label2.Text = _score.PlayerOneScore.Player.Name + "(X)";
 
             #endregion
 
@@ -68,6 +75,17 @@ namespace StackForm.Forms
 
         private void buttonBackToHabfttt_Click(object sender, EventArgs e)
         {
+            List<ScoreRecord> _scoreRecord = new List<ScoreRecord>();
+            if ((_score.PlayerOneScore.ScoreNum != 0) || (_score.PlayerSecondScore.ScoreNum != 0))
+            {
+                if (JsonFileHelper.JsonFileHelper.Read<List<ScoreRecord>>("ScoreRecordsTTT.json") != null)
+                {
+                    _scoreRecord = JsonFileHelper.JsonFileHelper.Read<List<ScoreRecord>>("ScoreRecordsTTT.json");
+                }
+                _scoreRecord.Add(_score);
+                JsonFileHelper.JsonFileHelper.Write<List<ScoreRecord>>("ScoreRecordsTTT.json", _scoreRecord);
+            }
+
             FormHab fh = new FormHab();
             fh.Show();
             this.Hide();
@@ -75,11 +93,34 @@ namespace StackForm.Forms
 
         private void FormTicTacToe_Closing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            List<ScoreRecord> _scoreRecord = new List<ScoreRecord>();
+            if ((_score.PlayerOneScore.ScoreNum != 0) || (_score.PlayerSecondScore.ScoreNum != 0))
+            {
+                if(JsonFileHelper.JsonFileHelper.Read<List<ScoreRecord>>("ScoreRecordsTTT.json") != null)
+                {
+                    _scoreRecord = JsonFileHelper.JsonFileHelper.Read<List<ScoreRecord>>("ScoreRecordsTTT.json");
+                }
+                _scoreRecord.Add(_score);
+                JsonFileHelper.JsonFileHelper.Write<List<ScoreRecord>>("ScoreRecordsTTT.json", _scoreRecord);
+            }
+
+                Application.Exit();
+            
         }
 
         private void buttonSelectOther_Click(object sender, EventArgs e)
         {
+            List<ScoreRecord> _scoreRecord = new List<ScoreRecord>();
+            if ((_score.PlayerOneScore.ScoreNum != 0) || (_score.PlayerSecondScore.ScoreNum != 0))
+            {
+                if (JsonFileHelper.JsonFileHelper.Read<List<ScoreRecord>>("ScoreRecordsTTT.json") != null)
+                {
+                    _scoreRecord = JsonFileHelper.JsonFileHelper.Read<List<ScoreRecord>>("ScoreRecordsTTT.json");
+                }
+                _scoreRecord.Add(_score);
+                JsonFileHelper.JsonFileHelper.Write<List<ScoreRecord>>("ScoreRecordsTTT.json", _scoreRecord);
+            }
+
             FormSelectPlayerForTTT fspttt = new FormSelectPlayerForTTT();
             fspttt.Show();
             this.Hide();
@@ -119,7 +160,9 @@ namespace StackForm.Forms
                             {
                                 if (_win == true)
                                 {
-                                    MessageBox.Show(_playerOne.Name + " Win");
+                                    MessageBox.Show(_score.PlayerOneScore.Player.Name + " Win");
+                                    _score.PlayerOneScore.ScoreNum++;
+                                    label3.Text = _score.PlayerOneScore.ScoreNum + ":" + _score.PlayerSecondScore.ScoreNum;
                                     break;
                                 }
                             }
@@ -155,7 +198,9 @@ namespace StackForm.Forms
                                     {
                                         if (_win == true)
                                         {
-                                            MessageBox.Show(_playerOne.Name + " Win");
+                                            MessageBox.Show(_score.PlayerOneScore.Player.Name + " Win");
+                                            _score.PlayerOneScore.ScoreNum++;
+                                            label3.Text = _score.PlayerOneScore.ScoreNum + ":" + _score.PlayerSecondScore.ScoreNum;
                                             break;
                                         }
                                     }
@@ -190,7 +235,9 @@ namespace StackForm.Forms
                                 {
                                     if (_win == true)
                                     {
-                                        MessageBox.Show(_playerOne.Name + " Win");
+                                        MessageBox.Show(_score.PlayerOneScore.Player.Name + " Win");
+                                        _score.PlayerOneScore.ScoreNum++;
+                                        label3.Text = _score.PlayerOneScore.ScoreNum + ":" + _score.PlayerSecondScore.ScoreNum;
                                         break;
                                     }
                                 }
@@ -225,7 +272,9 @@ namespace StackForm.Forms
                                     {
                                         if (_win == true)
                                         {
-                                            MessageBox.Show(_playerOne.Name + " Win");
+                                            MessageBox.Show(_score.PlayerOneScore.Player.Name + " Win");
+                                            _score.PlayerOneScore.ScoreNum++;
+                                            label3.Text = _score.PlayerOneScore.ScoreNum + ":" + _score.PlayerSecondScore.ScoreNum;
                                             break;
                                         }
                                     }
@@ -263,7 +312,9 @@ namespace StackForm.Forms
                             {
                                 if (_win == true)
                                 {
-                                    MessageBox.Show(_playerSecond.Name + " Win");
+                                    MessageBox.Show(_score.PlayerSecondScore.Player.Name + " Win");
+                                    _score.PlayerSecondScore.ScoreNum++;
+                                    label3.Text = _score.PlayerOneScore.ScoreNum + ":" + _score.PlayerSecondScore.ScoreNum;
                                     break;
                                 }
                             }
@@ -299,8 +350,9 @@ namespace StackForm.Forms
                                     {
                                         if (_win == true)
                                         {
-                                            MessageBox.Show(_playerSecond.Name + " Win");
-
+                                            MessageBox.Show(_score.PlayerSecondScore.Player.Name + " Win");
+                                            _score.PlayerSecondScore.ScoreNum++;
+                                            label3.Text = _score.PlayerOneScore.ScoreNum + ":" + _score.PlayerSecondScore.ScoreNum;
                                             break;
                                         }
                                     }
@@ -335,8 +387,9 @@ namespace StackForm.Forms
                                 {
                                     if (_win == true)
                                     {
-                                        MessageBox.Show(_playerSecond.Name + " Win");
-
+                                        MessageBox.Show(_score.PlayerSecondScore.Player.Name + " Win");
+                                        _score.PlayerSecondScore.ScoreNum++;
+                                        label3.Text = _score.PlayerOneScore.ScoreNum + ":" + _score.PlayerSecondScore.ScoreNum;
                                         break;
                                     }
                                 }
@@ -372,8 +425,9 @@ namespace StackForm.Forms
                                     {
                                         if (_win == true)
                                         {
-                                            MessageBox.Show(_playerSecond.Name + " Win");
-
+                                            MessageBox.Show(_score.PlayerSecondScore.Player.Name + " Win");
+                                            _score.PlayerSecondScore.ScoreNum++;
+                                            label3.Text = _score.PlayerOneScore.ScoreNum + ":" + _score.PlayerSecondScore.ScoreNum;
                                             break;
                                         }
                                     }
@@ -402,7 +456,7 @@ namespace StackForm.Forms
                 ((Button)sender).Text = "X";
                 ((Button)sender).Enabled = false;
                 _switchstroke = 2;
-                label2.Text = _playerSecond.Name + "(O)";
+                label2.Text = _score.PlayerSecondScore.Player.Name + "(O)";
                 CheckWin();
                 CheckDeadHeat();
             }
@@ -411,7 +465,7 @@ namespace StackForm.Forms
                 ((Button)sender).Text = "O";
                 ((Button)sender).Enabled = false;
                 _switchstroke = 1;
-                label2.Text = _playerOne.Name + "(X)";
+                label2.Text = _score.PlayerOneScore.Player.Name + "(X)";
                 CheckWin();
                 CheckDeadHeat();
             }
@@ -437,7 +491,7 @@ namespace StackForm.Forms
             }
             _win = false;
             _switchstroke = 1;
-            label2.Text = _playerOne.Name + "(X)";
+            label2.Text = _score.PlayerOneScore.Player.Name + "(X)";
         }
 
         private void CheckDeadHeat()

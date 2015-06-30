@@ -18,6 +18,9 @@ namespace StackForm.Forms
         private List<string> _playersList;
         private Player[] _selectedPlayers;
         private int _selectedPlayerNum;
+        private List<ScoreRecord> _scoreRecord;
+
+        private bool _isBreak;
 
 
         public FormSelectPlayerForTTT()
@@ -27,8 +30,8 @@ namespace StackForm.Forms
             _selectedPlayers[0] = new Player();
             _selectedPlayers[1] = new Player();
             _selectedPlayerNum = 0;
-
             _playersList = new List<string>();
+            _scoreRecord =new List<ScoreRecord>();
 
             if (JsonFileHelper.JsonFileHelper.Read<List<string>>("playersTicTacToeFile.json") != null)
             {
@@ -36,7 +39,6 @@ namespace StackForm.Forms
 
                 listBoxPlayersTicTacToe.Items.AddRange(_playersList.ToArray());
             }
-
         }
 
         private void buttonBackToHabTicTacToe_Click(object sender, EventArgs e)
@@ -98,7 +100,7 @@ namespace StackForm.Forms
                     listBoxSelectedPlayers.Items.Add(_selectedPlayers[0].Name);
                     _selectedPlayerNum = 1;
                 }
-                if(listBoxPlayersTicTacToe.SelectedItem.ToString() == _selectedPlayers[1].Name)
+                if (listBoxPlayersTicTacToe.SelectedItem.ToString() == _selectedPlayers[1].Name)
                 {
                     listBoxSelectedPlayers.Items.Clear();
                     listBoxSelectedPlayers.Items.Add(_selectedPlayers[0].Name);
@@ -153,9 +155,37 @@ namespace StackForm.Forms
         {
             if ((_selectedPlayers[0] != null) && (_selectedPlayers[1] != null))
             {
-                FormTicTacToe fttt = new FormTicTacToe(_selectedPlayers[0], _selectedPlayers[1], (int)numericUpDown1.Value, (int)numericUpDown2.Value);
+                foreach (var it in _scoreRecord)
+                {
+                    if ((it.PlayerOneScore.Player.Name == _selectedPlayers[0].Name) && (it.PlayerSecondScore.Player.Name == _selectedPlayers[1].Name))
+                    {
+                        FormTicTacToe fttt = new FormTicTacToe(_selectedPlayers[0], _selectedPlayers[1], (int)numericUpDown1.Value, (int)numericUpDown2.Value, it.PlayerOneScore.ScoreNum, it.PlayerSecondScore.ScoreNum);
+                        fttt.Show();
+                        this.Hide();
+                        _isBreak = true;
+                        break;
+                    }
+                    else _isBreak = false;
+                }
+                if(_isBreak == false)
+                {
+                FormTicTacToe fttt = new FormTicTacToe(_selectedPlayers[0], _selectedPlayers[1], (int)numericUpDown1.Value, (int)numericUpDown2.Value, 0, 0);
                 fttt.Show();
                 this.Hide();
+                }
+            }
+        }
+
+        private void FormSelectPlayerForTTT_Shown(object sender, EventArgs e)
+        {
+            listBoxRecords.Items.Clear();
+            if (JsonFileHelper.JsonFileHelper.Read<List<ScoreRecord>>("ScoreRecordsTTT.json") != null)
+            {
+                _scoreRecord = JsonFileHelper.JsonFileHelper.Read<List<ScoreRecord>>("ScoreRecordsTTT.json");
+                foreach (var it in _scoreRecord)
+                {
+                    listBoxRecords.Items.Add(it.PlayerOneScore.Player.Name + " VS " + it.PlayerSecondScore.Player.Name + "  " + it.PlayerOneScore.ScoreNum + ":" + it.PlayerSecondScore.ScoreNum);
+                }
             }
         }
     }
