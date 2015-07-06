@@ -157,9 +157,9 @@ namespace StackForm.Forms
             {
                 foreach (var it in _scoreRecord)
                 {
-                    if ((it.PlayerOneScore.Player.Name == _selectedPlayers[0].Name) && (it.PlayerSecondScore.Player.Name == _selectedPlayers[1].Name))
+                    if ((it.OnePlayerScore.Player.Name == _selectedPlayers[0].Name) && (it.PlayerSecondScore.Player.Name == _selectedPlayers[1].Name))
                     {
-                        FormTicTacToe fttt = new FormTicTacToe(_selectedPlayers[0], _selectedPlayers[1], (int)numericUpDown1.Value, (int)numericUpDown2.Value, it.PlayerOneScore.ScoreNum, it.PlayerSecondScore.ScoreNum);
+                        TicTacToeForm fttt = new TicTacToeForm(_selectedPlayers[0], _selectedPlayers[1], (int)numericUpDown1.Value, (int)numericUpDown2.Value, it.OnePlayerScore.ScoreNum, it.PlayerSecondScore.ScoreNum);
                         fttt.Show();
                         this.Hide();
                         _isBreak = true;
@@ -169,7 +169,7 @@ namespace StackForm.Forms
                 }
                 if(_isBreak == false)
                 {
-                FormTicTacToe fttt = new FormTicTacToe(_selectedPlayers[0], _selectedPlayers[1], (int)numericUpDown1.Value, (int)numericUpDown2.Value, 0, 0);
+                TicTacToeForm fttt = new TicTacToeForm(_selectedPlayers[0], _selectedPlayers[1], (int)numericUpDown1.Value, (int)numericUpDown2.Value, 0, 0);
                 fttt.Show();
                 this.Hide();
                 }
@@ -184,7 +184,7 @@ namespace StackForm.Forms
                 _scoreRecord = JsonFileHelper.JsonFileHelper.Read<List<ScoreRecord>>("ScoreRecordsTTT.json");
                 foreach (var it in _scoreRecord)
                 {
-                    listBoxRecords.Items.Add(it.PlayerOneScore.Player.Name + " VS " + it.PlayerSecondScore.Player.Name + "  " + it.PlayerOneScore.ScoreNum + ":" + it.PlayerSecondScore.ScoreNum);
+                    listBoxRecords.Items.Add(it.OnePlayerScore.Player.Name + " VS " + it.PlayerSecondScore.Player.Name + "  " + it.OnePlayerScore.ScoreNum + ":" + it.PlayerSecondScore.ScoreNum);
                 }
             }
         }
